@@ -26,13 +26,19 @@ TEXT = "\n".join(
     ]
 )
 
-# The gate takes UTF-8 text of 1 to 1,000 characters, not only white space.
-assert 1 <= len(TEXT) <= 1000, "text must be 1 to 1000 characters"
-assert TEXT.strip(), "text must not be only white space"
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+def main():
+    # The gate takes UTF-8 text of 1 to 1,000 characters, not only white space.
+    assert 1 <= len(TEXT) <= 1000, "text must be 1 to 1000 characters"
+    assert TEXT.strip(), "text must not be only white space"
 
-# Bytes, not text mode: text mode would write the platform's line ends
-# and its default encoding.
-with open(os.path.join(OUTPUT_DIR, "entry.txt"), "wb") as f:
-    f.write(TEXT.encode("utf-8"))
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # Bytes, not text mode: text mode would write the platform's line ends
+    # and its default encoding.
+    with open(os.path.join(OUTPUT_DIR, "entry.txt"), "wb") as f:
+        f.write(TEXT.encode("utf-8"))
+
+
+if __name__ == "__main__":
+    main()
